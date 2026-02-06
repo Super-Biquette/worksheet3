@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-
+import { MovieService, Movie } from './movie.service';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],
@@ -8,21 +8,18 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.css'
 })
 export class App {
-  movies: string[] = [
-    'Pacific Rim',
-    'Transformers',
-    'Avengers: Endgame',
-    'Avengers: Infinity War',
-    'Cars 1'
-  ];
 
-  favourites: string[] = [];
+  constructor(public movieService: MovieService) {}
 
-  addToFavourites(movie: string) {
-    this.favourites.push(movie);
+  addToFavourites(movie: Movie){
+    this.movieService.addToFavourites(movie);
   }
 
-  deleteFavourite(index: number) {
-    this.favourites.splice(index,1);
+  removeFavourite(index: number) {
+    this.movieService.removeFavourite(index);
+  }
+
+  isFavourite(movie: Movie): boolean{
+    return this.movieService.isFavourite(movie)
   }
 }

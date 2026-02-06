@@ -3,26 +3,32 @@
 <p>All Movies</p>
 
 <ul>
-  @for (movie of movies; track movie){
-    <li>{{ movie}}
-      <button (click)="addToFavourites(movie)">Add to favourites</button>
+  @for (movie of movieService.movies; track movie){
+    <li>
+      {{ movie }} ({{movie.year}} - {{movie.director}})
+      
+      <button 
+      (click)="addToFavourites(movie)"
+      [disabled]="isFavourite(movie)">
+      {{ isFavourite(movie) ? 'Added' : 'Add to favourites' }}
+    </button>
     </li>
   }
 </ul> 
 
 <p>Favourites movies of Student Herve LAGNEAUX, ID : S00295658</p>
 
-@if (favourites.length == 0) {
+@if (movieService.favourites.length == 0) {
   <p>None selected</p>
 } @else {
-  <p>{{ favourites.length}} movies chosen</p>
+  <p>{{ movieService.favourites.length}} movies chosen</p>
 }
 
 <ul>
-  @for (fav of favourites; let i = $index; track i){
+  @for (fav of movieService.favourites; let i = $index; track i){
     <li>
-      {{ fav }}
-      <button (click)="deleteFavourite(i)">Delete</button>
+      {{ fav.title }} ({{fav.year}} - {{fav.director}})
+      <button (click)="removeFavourite(i)">Delete</button>
     </li>
   }
 </ul>
