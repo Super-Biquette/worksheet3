@@ -5,7 +5,7 @@
 <ul>
   @for (movie of movieService.movies; track movie){
     <li>
-      {{ movie }} ({{movie.year}} - {{movie.director}})
+      {{ movie.title }} ({{movie.year}} - {{movie.director}})
       
       <button 
       (click)="addToFavourites(movie)"
