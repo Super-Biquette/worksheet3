@@ -1,0 +1,28 @@
+<h1>Favourite Movies</h1>
+
+<p>All Movies</p>
+
+<ul>
+  @for (movie of movies; track movie){
+    <li>{{ movie}}
+      <button (click)="addToFavourites(movie)">Add to favourites</button>
+    </li>
+  }
+</ul> 
+
+<p>Favourites movies of Student Herve LAGNEAUX, ID : S00295658</p>
+
+@if (favourites.length == 0) {
+  <p>None selected</p>
+} @else {
+  <p>{{ favourites.length}} movies chosen</p>
+}
+
+<ul>
+  @for (fav of favourites; let i = $index; track i){
+    <li>
+      {{ fav }}
+      <button (click)="deleteFavourite(i)">Delete</button>
+    </li>
+  }
+</ul>
